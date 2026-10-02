@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const { answer } = require('../lib/rag/assistant');
 const { retrieve, loadCorpus } = require('../lib/rag/retrieval');
 const { validateAnswer } = require('../lib/rag/validation');
+const { entries: serviceAnswers } = require('../lib/rag/serviceAnswers');
 const query = 'What does the FSSAI water testing scheme cover?';
 function valid(input) {
   const e = JSON.parse(input).evidence[0];
@@ -17,6 +18,21 @@ test('retrieval excludes superseded documents and damaged extraction', () => {
 test('clarification does not call the provider', async () => {
   const result = await answer('Which standard applies?', {}, () => { throw Error('Should not call'); });
   assert.equal(result.ragStatus,'clarification');
+});
+test('curated BIS service answers cite official pages without calling the model', async () => {
+  assert.equal(serviceAnswers.length, 12);
+  for (const entry of serviceAnswers) {
+    const result = await answer(entry.questions[0], {}, () => { throw Error('Should not call'); });
+    assert.equal(result.ragStatus, 'service_guide', entry.questions[0]);
+    assert.equal(result.sources.length, 1);
+    assert.ok(/^https:\/\/(?:www\.)?(?:bis\.gov\.in|crsbis\.in|lims\.bis\.gov\.in)\//.test(result.sources[0].url));
+    assert.ok(result.text.includes('Confirm current details'));
+  }
+});
+test('service guidance does not imply live registry verification', async () => {
+  const result = await answer('Is HUID ABC123 genuine?', {}, () => { throw Error('Should not call'); });
+  assert.equal(result.ragStatus, 'abstained');
+  assert.equal(result.sources.length, 0);
 });
 test('unsupported product with water history abstains', async () => {
   const result = await answer('What about a kettle?', {history:[{role:'user',text:query}]}, () => { throw Error('Should not call'); });

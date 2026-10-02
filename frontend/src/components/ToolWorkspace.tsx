@@ -17,11 +17,12 @@ import { MultilingualFeature } from './MultilingualFeature';
 import { RagArchitecture } from './RagArchitecture';
 import { SourceBackedSection } from './SourceBackedSection';
 import { ImpactMetrics } from './ImpactMetrics';
-import { QuickActions } from './QuickActions';
+import { BisServiceDirectory } from './BisServiceDirectory';
+import { OfficialSourceExplorer } from './OfficialSourceExplorer';
 import { StandardDetailModal } from './StandardDetailModal';
 import { CameraScannerModal } from './CameraScannerModal';
 
-const titles = { standards: 'Standards', assistant: 'Assistant', certification: 'Certification', labs: 'Laboratories', hallmarking: 'Hallmarking', support: 'Consumer support', about: 'About BISynapse', services: 'All services' };
+const titles = { standards: 'Standards', sources: 'Official sources', assistant: 'Assistant', certification: 'Certification', labs: 'Laboratories', hallmarking: 'Hallmarking', support: 'Consumer support', about: 'About BISynapse', services: 'All services' };
 export type ToolKind = keyof typeof titles;
 
 export function ToolWorkspace({ kind }: { kind: ToolKind }) {
@@ -50,7 +51,8 @@ export function ToolWorkspace({ kind }: { kind: ToolKind }) {
         {kind === 'labs' && <LabFinder currentLang={language} onSendToChat={ask} />}
         {kind === 'hallmarking' && <HallmarkingSection currentLang={language} onOpenScanner={() => router.push('/scan')} onSendToChat={ask} />}
         {kind === 'support' && <ConsumerSupport currentLang={language} onSendToChat={ask} />}
-        {kind === 'services' && <QuickActions currentLang={language} />}
+        {kind === 'services' && <BisServiceDirectory />}
+        {kind === 'sources' && <OfficialSourceExplorer />}
         {kind === 'about' && <>
           <p className="max-w-7xl mx-auto px-6 pb-8 text-sm text-slate-600">Project vision and planned capabilities. The architecture, dataset integrations, verification workflows, and impact targets below describe our roadmap, not completed integrations or measured outcomes.</p>
           <MultilingualFeature currentLang={language} onLanguageChange={setLanguage} />

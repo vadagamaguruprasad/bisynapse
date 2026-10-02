@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Shield, Globe, ChevronDown, User, HelpCircle, Menu, X } from 'lucide-react';
 import { Language, UserRole } from '@/lib/types';
 
@@ -23,11 +24,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
     { id: 'hero', label: 'Home', href: '/' },
     { id: 'services', label: 'Services', href: '/services' },
     { id: 'standards', label: 'Standards', href: '/standards' },
+    { id: 'sources', label: 'Sources', href: '/sources' },
     { id: 'scan', label: 'Scan', href: '/scan' },
     { id: 'assistant', label: 'Assistant', href: '/assistant' },
     { id: 'architecture', label: 'About', href: '/about' }
@@ -39,6 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       onNavigate(link.id);
     }
   };
+  const isCurrent = (href: string) => pathname === href || (href === '/services' && pathname.startsWith('/journeys/'));
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-slate-200 font-sans">
@@ -112,7 +116,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.id}
                   href={link.href}
                   onClick={() => handleNavClick(link)}
-                  className="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-[#0F4C81] hover:bg-slate-100 rounded-md transition-colors"
+                  aria-current={isCurrent(link.href) ? 'page' : undefined}
+                  className={`px-3 py-1.5 text-xs font-semibold hover:text-[#0F4C81] hover:bg-slate-100 rounded-md transition-colors ${isCurrent(link.href) ? 'bg-[#e7f0ef] text-[#0a2540]' : 'text-slate-700'}`}
                 >
                   {link.label}
                 </Link>
@@ -128,6 +133,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                aria-expanded={langDropdownOpen}
+                aria-controls="desktop-language-options"
+                aria-label={`Select available display language, current ${currentLang === 'en' ? 'English' : currentLang === 'hi' ? 'Hindi' : 'Telugu'}`}
                 className="flex items-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-md border border-slate-200 transition-colors"
               >
                 <Globe className="w-3.5 h-3.5 text-[#0F4C81]" />
@@ -136,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-1 w-36 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50 text-left">
+                <div id="desktop-language-options" onKeyDown={(event) => { if (event.key === 'Escape') setLangDropdownOpen(false); }} className="absolute right-0 mt-1 w-36 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50 text-left">
                   <button
                     onClick={() => { onLanguageChange('en'); setLangDropdownOpen(false); }}
                     className={`w-full text-left px-3 py-1.5 text-xs font-medium hover:bg-slate-50 flex items-center justify-between ${currentLang === 'en' ? 'text-[#0F4C81] font-bold bg-slate-50' : 'text-slate-700'}`}
@@ -207,6 +215,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-slate-700 hover:bg-slate-100 rounded-md"
             >
@@ -219,13 +228,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 text-left">
+        <div id="mobile-navigation" onKeyDown={(event) => { if (event.key === 'Escape') setMobileMenuOpen(false); }} className="xl:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 text-left">
           {navLinks.map((link) => (
             <Link
               key={link.id}
               href={link.href}
               onClick={() => handleNavClick(link)}
-              className="block px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-md"
+              aria-current={isCurrent(link.href) ? 'page' : undefined}
+              className={`block px-3 py-2 text-xs font-semibold hover:bg-slate-100 rounded-md ${isCurrent(link.href) ? 'bg-[#e7f0ef] text-[#0a2540]' : 'text-slate-700'}`}
             >
               {link.label}
             </Link>
@@ -235,9 +245,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="flex justify-between items-center px-3 py-1">
               <span className="text-xs font-semibold text-slate-600">Language:</span>
               <div className="flex space-x-1">
-                <button onClick={() => onLanguageChange('en')} className={`px-2 py-0.5 text-xs font-bold rounded ${currentLang === 'en' ? 'bg-[#0F4C81] text-white' : 'bg-slate-100'}`}>EN</button>
-                <button onClick={() => onLanguageChange('hi')} className={`px-2 py-0.5 text-xs font-bold rounded ${currentLang === 'hi' ? 'bg-[#0F4C81] text-white' : 'bg-slate-100'}`}>HI</button>
-                <button onClick={() => onLanguageChange('te')} className={`px-2 py-0.5 text-xs font-bold rounded ${currentLang === 'te' ? 'bg-[#0F4C81] text-white' : 'bg-slate-100'}`}>TE</button>
+                <button aria-label="English" aria-pressed={currentLang === 'en'} onClick={() => onLanguageChange('en')} className={`px-2 py-0.5 text-xs font-bold rounded ${currentLang === 'en' ? 'bg-[#0F4C81] text-white' : 'bg-slate-100'}`}>EN</button>
+                <button aria-label="Hindi" aria-pressed={currentLang === 'hi'} onClick={() => onLanguageChange('hi')} className={`px-2 py-0.5 text-xs font-bold rounded ${currentLang === 'hi' ? 'bg-[#0F4C81] text-white' : 'bg-slate-100'}`}>HI</button>
+                <button aria-label="Telugu" aria-pressed={currentLang === 'te'} onClick={() => onLanguageChange('te')} className={`px-2 py-0.5 text-xs font-bold rounded ${currentLang === 'te' ? 'bg-[#0F4C81] text-white' : 'bg-slate-100'}`}>TE</button>
               </div>
             </div>
 

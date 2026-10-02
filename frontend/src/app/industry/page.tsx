@@ -12,11 +12,11 @@ function IndustryDashboardContent() {
   const { user, logout } = useAuth();
   const services = [
     { title: 'Find Applicable Standards', desc: 'Identify Indian Standards for product engineering', icon: Search, href: '/standards' },
-    { title: 'Certification Guidance', desc: 'Step-by-step ManakOnline e-BIS application workflow', icon: Award, href: '/certification' },
-    { title: 'Compliance Check', desc: 'Verify mandatory QCO notifications & test parameters', icon: ShieldCheck, href: '/certification' },
-    { title: 'Search Standards', desc: 'Deep search e-Standards database by IS number', icon: Layers, href: '/standards' },
+    { title: 'Manufacturer Journey', desc: 'Follow source-linked steps for Scheme I, CRS or FMCS', icon: Award, href: '/journeys/manufacturer' },
+    { title: 'QCO Guidance', desc: 'Find the current BIS compulsory-certification lists', icon: ShieldCheck, href: '/services' },
+    { title: 'Official Standards Catalogue', desc: 'Use BIS Know Your Standard for editions and amendments', icon: Layers, href: '/services' },
     { title: 'Laboratory Information', desc: 'Locate BIS recognized & LIMS test facilities', icon: FlaskConical, href: '/labs' },
-    { title: 'Ask BISynapse', desc: 'AI compliance guide for manufacturers & MSMEs', icon: MessageSquare, href: '/assistant' }
+    { title: 'Ask BISynapse', desc: 'Reviewed BIS service guidance and water-source answers', icon: MessageSquare, href: '/assistant' }
   ];
 
   return (
@@ -35,7 +35,7 @@ function IndustryDashboardContent() {
               Welcome, {user?.name || 'Industry / MSME'}
             </h1>
             <p className="text-xs text-slate-300">
-              Discover applicable standards, follow the 9-stage certification stepper, and claim MSME concessions.
+              Start with a candidate standard, check current QCOs, and choose the applicable BIS scheme.
             </p>
           </div>
 
@@ -48,13 +48,13 @@ function IndustryDashboardContent() {
           </Link>
         </div>
 
-        {/* MSME Concessions Callout */}
+        {/* Current fees and concessions must be checked for the applicable scheme. */}
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-amber-900 text-xs flex items-start space-x-3">
           <DollarSign className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
           <div>
-            <span className="font-bold text-sm block">MSME & Startup Fee Concessions</span>
+            <span className="font-bold text-sm block">Check current fees and concessions</span>
             <p className="mt-0.5 leading-relaxed">
-              Under BIS notifications, Micro & Small Enterprises with valid Udyam registration receive a <strong>50% concession</strong> on marking fees and application processing fees.
+              BIS fees and concessions depend on the scheme and current notifications. Review the applicable fee page before budgeting or applying. <a href="https://www.bis.gov.in/product-certification/product-certification-fee/?lang=en" target="_blank" rel="noopener noreferrer" className="font-bold underline">Open official BIS fees</a>.
             </p>
           </div>
         </div>

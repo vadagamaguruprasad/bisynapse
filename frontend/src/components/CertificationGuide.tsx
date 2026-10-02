@@ -1,112 +1,35 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Award, CheckCircle2 } from 'lucide-react';
-import { Language } from '@/lib/types';
+import { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+import type { Language } from '@/lib/types';
 
-interface CertificationGuideProps {
-  currentLang: Language;
-  onSendToChat: (query: string) => void;
-}
+interface CertificationGuideProps { currentLang: Language; onSendToChat: (query: string) => void; }
 
-export const CertificationGuide: React.FC<CertificationGuideProps> = () => {
-  const [activeStep, setActiveStep] = useState(0);
+const routes = [
+  { id: 'scheme-i', label: 'Scheme I · ISI Mark', audience: 'Product manufacturers', intro: 'BIS assesses manufacturing and testing capability and product conformity before granting a licence to use the Standard Mark.', steps: ['Identify the applicable Indian Standard and product manual', 'Check whether a current QCO makes certification compulsory', 'Review Scheme I grant guidelines, testing requirements and fees', 'Apply through the official BIS portal and follow its assessment process'], source: 'https://www.bis.gov.in/product-certification/product-certification-process/?lang=en', sourceLabel: 'Scheme I process and guidelines' },
+  { id: 'scheme-ii', label: 'Scheme II · CRS', audience: 'Notified electronics and IT products', intro: 'CRS is a separate registration process for notified product categories. The official CRS portal provides current standards and application steps.', steps: ['Confirm your exact product category on the CRS portal', 'Generate a test request and use a BIS recognised laboratory', 'Verify the test report and submit the portal application', 'Check the registration and permitted marking details'], source: 'https://www.crsbis.in/BIS/registration-page.do', sourceLabel: 'CRS registration steps' },
+  { id: 'systems', label: 'Management systems', audience: 'Organisations and service providers', intro: 'Management systems certification covers organisational systems such as quality and environmental management. It follows a different scheme from product certification.', steps: ['Select the management system and relevant standard', 'Read the BIS scheme and application guidance', 'Prepare the organisation for assessment', 'Use the current BIS process for certification and surveillance'], source: 'https://www.bis.gov.in/system-certification-overview/?lang=en', sourceLabel: 'BIS systems certification overview' },
+] as const;
 
-  const steps = [
-    { number: '01', title: 'Identify Indian Standard', desc: 'Locate exact IS number for product category.', detail: 'Use BISynapse Standards Search to identify relevant specifications (e.g. IS 302 Part 2 for kettles).', docs: ['Technical datasheet', 'Raw material specs'] },
-    { number: '02', title: 'Check Mandatory QCO Status', desc: 'Verify Quality Control Orders.', detail: 'Mandatory QCO items require a valid BIS licence before manufacturing or selling under BIS Act 2016.', docs: ['Gazette notification', 'Ministry circular'] },
-    { number: '03', title: 'Select Certification Scheme', desc: 'ISI Mark (Scheme I) or CRS (Scheme II).', detail: 'Scheme I (ISI) requires factory inspection + lab testing. Scheme II (CRS) relies on type test reports.', docs: ['Scheme guidelines', 'Fee schedule'] },
-    { number: '04', title: 'Prepare Factory Documents', desc: 'Quality control manual & calibration records.', detail: 'Check current scheme-specific documentation and any available concessions with BIS.', docs: ['Applicable business registration', 'Test equipment calibration'] },
-    { number: '05', title: 'Product Sample Testing', desc: 'Submit samples to BIS recognized lab.', detail: 'Samples undergo electrical safety, mechanical endurance, and chemical purity assays.', docs: ['Test Request (TR) form', 'LIMS tracking ID'] },
-    { number: '06', title: 'Submit e-BIS Application', desc: 'File application on ManakOnline portal.', detail: 'File online on manakonline.in. Application is assigned to designated BIS Branch Office.', docs: ['ManakOnline application ref', 'Fee payment receipt'] },
-    { number: '07', title: 'Factory Inspection Audit', desc: 'BIS Inspecting Officer visits premises.', detail: 'Officer inspects raw material storage, line quality checks, and draws independent samples.', docs: ['Inspection report', 'Sample sealing slip'] },
-    { number: '08', title: 'Licence Grant Decision', desc: 'Check the official decision and permitted scope.', detail: 'Use a certification mark only as permitted by the granted licence or registration and its applicable scheme.', docs: ['Official licence or registration', 'Permitted marking conditions'] },
-    { number: '09', title: 'Surveillance & Renewal', desc: 'Check scheme-specific surveillance and renewal.', detail: 'Confirm the surveillance schedule, validity and renewal requirements stated by BIS for your scheme.', docs: ['Quality logbooks', 'Applicable renewal records'] }
-  ];
-
-  return (
-    <section id="certification" className="py-12 bg-white border-t border-slate-200 scroll-mt-20 font-sans text-left">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="border-b border-slate-200 pb-4 mb-8">
-          <div className="inline-flex items-center space-x-2 px-2.5 py-0.5 rounded bg-blue-100 text-[#0F4C81] text-xs font-bold mb-2">
-            <Award className="w-3.5 h-3.5" />
-            <span>Visual Certification Stepper Workflow</span>
-          </div>
-          <h2 className="text-2xl font-black text-[#0A2540]">
-            BIS Certification Journey
-          </h2>
-          <p className="text-xs text-slate-600">
-            End-to-end 9-stage compliance roadmap for Indian manufacturers, MSMEs, startups and foreign exporters.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-5 space-y-2 max-h-[500px] overflow-y-auto pr-2">
-            {steps.map((step, idx) => {
-              const isActive = activeStep === idx;
-              return (
-                <div
-                  key={idx}
-                  onClick={() => setActiveStep(idx)}
-                  className={`p-3.5 rounded border transition-colors cursor-pointer flex items-center space-x-3 ${isActive ? 'bg-[#0A2540] text-white border-[#0A2540] shadow-2xs' : 'bg-slate-50 text-slate-800 border-slate-200 hover:bg-slate-100'}`}
-                >
-                  <span className={`w-7 h-7 rounded flex items-center justify-center font-bold text-xs shrink-0 ${isActive ? 'bg-amber-400 text-[#0A2540]' : 'bg-slate-200 text-slate-700'}`}>
-                    {step.number}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-xs truncate">{step.title}</h4>
-                    <p className={`text-[11px] truncate ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>{step.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="lg:col-span-7">
-            <div className="bg-slate-50 rounded-lg p-6 border border-slate-200 shadow-2xs space-y-4 flex flex-col justify-between h-full">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                  <span className="text-xs font-bold text-[#0F4C81] ">Stage {steps[activeStep].number} of 09</span>
-                  <h3 className="text-lg font-bold text-[#0A2540]">{steps[activeStep].title}</h3>
-                </div>
-
-                <p className="text-xs text-slate-700 leading-relaxed">{steps[activeStep].detail}</p>
-
-                <div className="bg-white p-3.5 rounded border border-slate-200 space-y-1.5 text-xs">
-                  <span className="font-bold text-[#0A2540] block text-[10px]">Required Checklist & Documents:</span>
-                  <ul className="space-y-1">
-                    {steps[activeStep].docs.map((doc, idx) => (
-                      <li key={idx} className="flex items-center space-x-2 text-slate-700 text-xs">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>{doc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="pt-3 border-t border-slate-200 flex justify-between items-center text-xs">
-                <button
-                  disabled={activeStep === 0}
-                  onClick={() => setActiveStep(prev => Math.max(0, prev - 1))}
-                  className="px-3 py-1.5 bg-white border border-slate-300 rounded font-bold text-slate-700 disabled:opacity-40"
-                >
-                  ← Previous
-                </button>
-                <button
-                  disabled={activeStep === steps.length - 1}
-                  onClick={() => setActiveStep(prev => Math.min(steps.length - 1, prev + 1))}
-                  className="px-3 py-1.5 bg-[#0F4C81] text-white rounded font-bold disabled:opacity-40"
-                >
-                  Next →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
+export function CertificationGuide({ onSendToChat }: CertificationGuideProps) {
+  const [activeId, setActiveId] = useState<(typeof routes)[number]['id']>('scheme-i');
+  const active = routes.find((route) => route.id === activeId) ?? routes[0];
+  return <section className="py-12 bg-slate-50 border-t border-slate-200">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p className="eyebrow text-[#237c7c]">Choose the right route</p>
+      <h2 className="text-3xl font-bold text-[#0a2540] mt-3">Certification depends on the product and scheme.</h2>
+      <p className="text-slate-600 mt-3 max-w-3xl">This guide helps you start. Check the current standard, QCO, process, fees and eligibility with BIS before applying.</p>
+      <div role="tablist" aria-label="Certification route" className="flex flex-wrap gap-3 mt-8">
+        {routes.map((route) => <button key={route.id} id={`tab-${route.id}`} type="button" role="tab" aria-selected={route.id === activeId} aria-controls="certification-route-panel" onClick={() => setActiveId(route.id)} className={`rounded-full border px-5 py-2.5 text-sm font-semibold ${route.id === activeId ? 'bg-[#0a2540] border-[#0a2540] text-white' : 'bg-white border-slate-300 text-slate-700'}`}>{route.label}</button>)}
       </div>
-    </section>
-  );
-};
+      <div id="certification-route-panel" role="tabpanel" aria-labelledby={`tab-${active.id}`} className="mt-6 grid lg:grid-cols-[1fr_1.1fr] gap-6 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8">
+        <div><span className="text-xs font-bold uppercase tracking-wide text-[#237c7c]">{active.audience}</span><h3 className="text-2xl font-bold text-[#0a2540] mt-3">{active.label}</h3><p className="text-slate-600 mt-4">{active.intro}</p><a href={active.source} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-[#0f4c81] underline mt-7">{active.sourceLabel}<ArrowUpRight size={16} /></a></div>
+        <div className="bg-[#f2f7f6] rounded-xl p-6"><h4 className="font-bold text-[#0a2540]">A sensible starting sequence</h4><ol className="space-y-5 mt-5">{active.steps.map((step, index) => <li key={step} className="flex gap-3 text-sm text-slate-700"><span className="shrink-0 w-7 h-7 rounded-full bg-white text-[#0d6a66] font-bold flex items-center justify-center">{index + 1}</span><span>{step}</span></li>)}</ol><p className="mt-6 pt-5 border-t border-[#d9e7e5] text-xs text-slate-600">General guidance. Use the linked BIS instructions for a product-specific checklist.</p></div>
+      </div>
+      <button type="button" onClick={() => onSendToChat('What water-sector certification guidance can you support with sources?')} className="mt-6 text-sm font-bold text-[#0f4c81] underline">Ask the source-backed water assistant</button>
+      <Link href="/journeys/manufacturer" className="ml-5 inline-block text-sm font-bold text-[#0f4c81] underline">Open manufacturer journey</Link>
+    </div>
+  </section>;
+}

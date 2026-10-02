@@ -3,6 +3,7 @@ const { generate } = require('./provider');
 const { prompt } = require('./prompts');
 const { validateAnswer } = require('./validation');
 const { findVerifiedAnswer, supportsVerifiedFallback } = require('./verifiedAnswers');
+const { findServiceAnswer } = require('./serviceAnswers');
 function message(text, status, sources = [], extra = {}) {
   return { id: 'rag-'+crypto.randomUUID(), sender:'assistant', timestamp:new Date().toISOString(), text, sources,
     ragStatus:status, isPrototypeNotice:true, ...extra };
@@ -31,6 +32,8 @@ function retrievalAliases(text) {
   return `${identifiers.join(' ')} ${aliases.join(' ')}`.trim();
 }
 async function answer(query, { language='en', history=[] } = {}, provider=generate) {
+  const serviceGuide = findServiceAnswer(query);
+  if (serviceGuide) return message(serviceGuide.answer, 'service_guide', serviceGuide.sources, {followUps:serviceGuide.followUps});
   const recent = history.slice(-4);
   const context = recent.filter(h => h.role === 'user').map(h => h.text).join(' ');
   const full = query + ' ' + context;

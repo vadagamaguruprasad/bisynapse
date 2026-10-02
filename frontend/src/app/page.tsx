@@ -38,6 +38,12 @@ export default function Home() {
       <main>
         <Hero currentLang={language} />
         <QuickActions currentLang={language} />
+        <section className="coverage-section">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 coverage-grid">
+            <div><p className="eyebrow text-[#237c7c] mb-3">Know the scope</p><h2>Guidance you can trace.</h2><p className="mt-4 text-slate-600 max-w-xl">Ask about reviewed water documents or core BIS services. Each answer links to the material behind it.</p></div>
+            <div className="coverage-cards"><div><span>01 / PDF PILOT</span><strong>Water standards assistant</strong><p>Water answers cite captured BIS and FSSAI document pages. Domain review is still incomplete.</p><Link href="/assistant">Ask about water →</Link></div><div><span>02 / REVIEWED GUIDES</span><strong>Wider BIS services</strong><p>Twelve curated service guides link to the official BIS route for each topic.</p><Link href="/services">Explore BIS services →</Link></div><div><span>03 / SOURCE LIBRARY</span><strong>See what the site uses</strong><p>Browse review dates, captured PDFs and historical status, then continue to the official live portal.</p><Link href="/sources">Search the source library →</Link></div></div>
+          </div>
+        </section>
         <section className="bg-[#eef3f3]">
           <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-start gap-6">
             <div><h2 className="text-2xl font-semibold">Have a question about standards?</h2><p className="text-slate-600 mt-3">Open the assistant for guidance, or explore the project and its planned capabilities.</p></div>

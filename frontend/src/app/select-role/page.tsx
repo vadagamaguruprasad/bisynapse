@@ -21,13 +21,13 @@ export default function SelectRolePage() {
     {
       id: 'consumer' as UserRole,
       title: 'Consumer',
-      description: 'Verify products, certifications and BIS information.',
+      description: 'Find official checks for products, marks and BIS information.',
       icon: UserCheck,
     },
     {
       id: 'retailer' as UserRole,
       title: 'Retailer',
-      description: 'Verify products and access compliance information.',
+      description: 'Review supplier marks and current BIS product guidance.',
       icon: Store,
     },
     {
@@ -39,7 +39,7 @@ export default function SelectRolePage() {
     {
       id: 'officer' as UserRole,
       title: 'Government Officer',
-      description: 'Access authorized BIS information and compliance tools.',
+      description: 'Access the approved BISynapse officer prototype workspace.',
       icon: Shield,
     },
   ];
@@ -195,7 +195,7 @@ export default function SelectRolePage() {
           </div>
 
           <div className="text-center text-xs text-slate-500">
-            <span>Official Bureau of Indian Standards Service Gateway</span>
+            <span>Independent BISynapse prototype gateway</span>
           </div>
 
         </div>

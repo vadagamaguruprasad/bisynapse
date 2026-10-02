@@ -35,7 +35,7 @@ export const StandardDetailModal: React.FC<StandardDetailModalProps> = ({
             <span className="font-mono text-xs font-bold text-amber-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">
               {standard.number}
             </span>
-            <span className="text-xs text-slate-300">{standard.isDemo ? 'Unverified example record' : 'Captured manual metadata'}</span>
+            <span className="text-xs text-slate-300">{standard.isDemo ? 'Unverified example record' : 'Document-linked metadata'}</span>
           </div>
 
           <button aria-label="Close standard details" onClick={onClose} className="p-1 rounded text-slate-400 hover:text-white">
@@ -69,7 +69,7 @@ export const StandardDetailModal: React.FC<StandardDetailModalProps> = ({
             <div className="space-y-1.5 text-xs">
               <span className="font-bold text-[#0A2540] tracking-wider block flex items-center space-x-1">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>Key Safety Requirements:</span>
+                <span>Listed Requirements (confirm with BIS):</span>
               </span>
               <ul className="space-y-1 pl-1">
                 {standard.keyRequirements.map((req, idx) => (
@@ -86,7 +86,7 @@ export const StandardDetailModal: React.FC<StandardDetailModalProps> = ({
             <div className="space-y-1.5 text-xs">
               <span className="font-bold text-[#0A2540] tracking-wider block flex items-center space-x-1">
                 <FlaskConical className="w-4 h-4 text-[#0F4C81]" />
-                <span>Mandatory Lab Testing Parameters:</span>
+                <span>Listed Testing Fields (confirm with BIS):</span>
               </span>
               <div className="flex flex-wrap gap-1">
                 {standard.testingRequired.map((t, idx) => (

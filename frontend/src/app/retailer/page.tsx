@@ -11,12 +11,12 @@ import { useAuth } from '@/lib/authContext';
 function RetailerDashboardContent() {
   const { user, logout } = useAuth();
   const services = [
-    { title: 'Verify Product', desc: 'Verify supplier stock & manufacturer licences', icon: ShieldCheck, href: '/scan' },
+    { title: 'Check a Supplier Mark', desc: 'Find BIS CARE routes for licence details', icon: ShieldCheck, href: '/services' },
     { title: 'Scan Product', desc: 'Scan barcodes or ISI QR codes on incoming inventory', icon: Scan, href: '/scan' },
-    { title: 'Check Certification', desc: 'Check validity of manufacturer CM/L or CRS registration', icon: Award, href: '/certification' },
-    { title: 'Search Standards', desc: 'Look up Quality Control Orders (QCOs) for stock', icon: Search, href: '/standards' },
-    { title: 'Compliance Information', desc: 'Review mandatory sales compliance regulations', icon: FileCheck, href: '/certification' },
-    { title: 'Ask BISynapse', desc: 'Consult AI assistant on merchant obligations', icon: MessageSquare, href: '/assistant' }
+    { title: 'Certification Routes', desc: 'Understand BIS product schemes and official application links', icon: Award, href: '/certification' },
+    { title: 'Check QCO Lists', desc: 'Review current compulsory-certification listings on BIS', icon: Search, href: '/services' },
+    { title: 'Product Guidance', desc: 'Explore prototype standards records and confirm on BIS', icon: FileCheck, href: '/standards' },
+    { title: 'Ask BISynapse', desc: 'Reviewed BIS service guidance and water-source answers', icon: MessageSquare, href: '/assistant' }
   ];
 
   return (
@@ -35,7 +35,7 @@ function RetailerDashboardContent() {
               Welcome, {user?.name || 'Retailer'}
             </h1>
             <p className="text-xs text-slate-300">
-              Verify supplier inventory compliance, check mandatory QCO listing, and access official BIS records.
+              Find official checks for supplier marks and current product requirements.
             </p>
           </div>
 
@@ -44,7 +44,7 @@ function RetailerDashboardContent() {
             className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-md shadow-2xs flex items-center space-x-1.5 transition-colors shrink-0"
           >
             <Scan className="w-4 h-4" />
-            <span>Verify Stock</span>
+            <span>Explore Label</span>
           </Link>
         </div>
 

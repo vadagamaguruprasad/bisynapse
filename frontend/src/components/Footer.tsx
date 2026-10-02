@@ -69,9 +69,10 @@ export const Footer: React.FC<FooterProps> = () => {
               </li>
               <li>
                 <Link href="/scan" className="hover:text-amber-400 transition-colors">
-                  Scan & Verify Scanner
+                  Prototype Label Explorer
                 </Link>
               </li>
+              <li><Link href="/sources" className="hover:text-amber-400 transition-colors">Official Source Library</Link></li>
             </ul>
           </div>
 
@@ -94,7 +95,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 </a>
               </li>
               <li>
-                <a href="https://www.limsbis.in" target="_blank" rel="noreferrer" className="hover:text-amber-400 transition-colors flex items-center justify-between">
+                <a href="https://lims.bis.gov.in/" target="_blank" rel="noreferrer" className="hover:text-amber-400 transition-colors flex items-center justify-between">
                   <span>BIS LIMS Laboratory Directory</span>
                   <ExternalLink className="w-3 h-3 text-slate-500" />
                 </a>
@@ -106,7 +107,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 </a>
               </li>
               <li>
-                <a href="https://www.bis.gov.in/hallmarking-2/" target="_blank" rel="noreferrer" className="hover:text-amber-400 transition-colors flex items-center justify-between">
+                <a href="https://www.bis.gov.in/hallmarking-overview/?lang=en" target="_blank" rel="noreferrer" className="hover:text-amber-400 transition-colors flex items-center justify-between">
                   <span>BIS Hallmarking Portal</span>
                   <ExternalLink className="w-3 h-3 text-slate-500" />
                 </a>

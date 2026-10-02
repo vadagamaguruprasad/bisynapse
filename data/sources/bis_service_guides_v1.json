@@ -1,0 +1,217 @@
+{
+  "dataset": "bis-service-guides-v1",
+  "reviewed_on": "2026-09-27",
+  "source_policy": "Public BIS-operated service guidance; no full Indian Standards text or live registry data",
+  "entries": [
+    {
+      "id": "qco",
+      "title": "Compulsory certification & QCOs",
+      "questions": [
+        "Is BIS certification mandatory for every product?",
+        "Do all products need BIS certification?",
+        "Is BIS certification compulsory for all products?",
+        "What is a Quality Control Order?"
+      ],
+      "answer": "BIS product certification is generally voluntary. A Quality Control Order can make certification compulsory for a specified product. Check the current BIS list and the linked order for your exact product and effective date.",
+      "source": [
+        "BIS: Products under Compulsory Certification",
+        "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en"
+      ],
+      "followUps": [
+        "How do I apply for the ISI Mark?",
+        "What is the BIS Compulsory Registration Scheme?"
+      ]
+    },
+    {
+      "id": "scheme-i",
+      "title": "Applying for the ISI Mark",
+      "questions": [
+        "How do I apply for the ISI Mark?",
+        "How do I get a BIS product certification licence?",
+        "How can I apply for ISI certification?",
+        "How to apply for the ISI Mark?"
+      ],
+      "answer": "First identify the applicable Indian Standard and check whether your product falls under a current QCO. BIS publishes Scheme I grant guidelines, product-specific information and the application route. Use those instructions for the actual documents, testing, fees and assessment.",
+      "source": [
+        "BIS: Product Certification Process",
+        "https://www.bis.gov.in/product-certification/product-certification-process/?lang=en"
+      ],
+      "followUps": [
+        "Is BIS certification mandatory for every product?",
+        "Where can I find BIS recognised laboratories?"
+      ]
+    },
+    {
+      "id": "crs",
+      "title": "CRS registration",
+      "questions": [
+        "What is the BIS Compulsory Registration Scheme?",
+        "How does BIS CRS registration work?",
+        "What is BIS CRS?",
+        "Explain the BIS Compulsory Registration Scheme"
+      ],
+      "answer": "The BIS Compulsory Registration Scheme is a separate route for notified product categories. The CRS portal lists product standards and explains test requests, recognised laboratory testing and online registration. Check the exact category before applying.",
+      "source": [
+        "BIS CRS: Registration",
+        "https://www.crsbis.in/BIS/registration-page.do"
+      ],
+      "followUps": [
+        "Where can I find BIS recognised laboratories?",
+        "Is BIS certification mandatory for every product?"
+      ]
+    },
+    {
+      "id": "huid",
+      "title": "Checking a jewellery HUID",
+      "questions": [
+        "How can I verify a HUID?",
+        "Where can I check a jewellery HUID?",
+        "How do I check a HUID?",
+        "How to verify HUID?"
+      ],
+      "answer": "Use the Verify HUID feature in the official BIS CARE app, then compare the returned jewellery details with the item. BISynapse cannot authenticate a HUID from a typed code or photo.",
+      "source": [
+        "BIS: BIS CARE App",
+        "https://www.bis.gov.in/bis-apps/?lang=en"
+      ],
+      "followUps": [
+        "How can I verify a BIS licence?",
+        "How do I file a BIS consumer complaint?"
+      ]
+    },
+    {
+      "id": "licence",
+      "title": "Checking a BIS licence",
+      "questions": [
+        "How can I verify a BIS licence?",
+        "How do I check an ISI licence number?",
+        "How do I check a BIS license?",
+        "How to verify a BIS licence?"
+      ],
+      "answer": "Use Verify Licence Details in the official BIS CARE app and compare the returned record with the mark and product. BISynapse does not query the live licence registry.",
+      "source": [
+        "BIS: BIS CARE App",
+        "https://www.bis.gov.in/bis-apps/?lang=en"
+      ],
+      "followUps": [
+        "How can I verify a HUID?",
+        "How do I file a BIS consumer complaint?"
+      ]
+    },
+    {
+      "id": "labs",
+      "title": "Finding recognised laboratories",
+      "questions": [
+        "Where can I find BIS recognised laboratories?",
+        "How do I find a BIS lab for my standard?",
+        "Where can I find BIS recognized labs?",
+        "How to find a BIS recognised laboratory?"
+      ],
+      "answer": "Search BIS LIMS for a recognised laboratory and check its current scope against the Indian Standard you need tested. A laboratory listing alone does not show that every test is within its recognition scope.",
+      "source": [
+        "BIS LIMS: Recognised Labs",
+        "https://lims.bis.gov.in/home/labs/"
+      ],
+      "followUps": [
+        "How do I apply for the ISI Mark?",
+        "What is the BIS Compulsory Registration Scheme?"
+      ]
+    },
+    {
+      "id": "complaints",
+      "title": "Consumer complaints",
+      "questions": [
+        "How do I file a BIS consumer complaint?",
+        "Where can I complain about a BIS marked product?",
+        "How can I complain to BIS?",
+        "How to file a BIS complaint?"
+      ],
+      "answer": "BIS accepts consumer complaints offline and online. Its online complaint page directs users to BIS CARE or the official complaint portal. Use that route for a case-specific response and keep the product and mark details available.",
+      "source": [
+        "BIS: Online Complaint Registration",
+        "https://www.bis.gov.in/consumer-overview/online-complaint-registration/?lang=en"
+      ],
+      "followUps": [
+        "How can I verify a BIS licence?",
+        "How can I verify a HUID?"
+      ]
+    },
+    {
+      "id": "fmcs",
+      "title": "Foreign manufacturers",
+      "questions": [
+        "What is the Foreign Manufacturers Certification Scheme?",
+        "Can a foreign manufacturer apply for BIS certification?",
+        "What is BIS FMCS?",
+        "How do foreign manufacturers get BIS certification?"
+      ],
+      "answer": "BIS operates the Foreign Manufacturers Certification Scheme for eligible manufacturers outside India seeking a licence to use the Standard Mark. The BIS overview points electronics and IT goods notified by MeitY toward the separate CRS route.",
+      "source": [
+        "BIS: FMCS Overview",
+        "https://www.bis.gov.in/fmcs/fmcs-overview/?lang=en"
+      ],
+      "followUps": [
+        "What is the BIS Compulsory Registration Scheme?",
+        "Is BIS certification mandatory for every product?"
+      ]
+    },
+    {
+      "id": "systems",
+      "title": "Management systems certification",
+      "questions": [
+        "Does BIS certify management systems?",
+        "What is BIS management systems certification?",
+        "Does BIS offer quality management system certification?"
+      ],
+      "answer": "Yes. BIS operates management systems certification schemes, including quality and environmental management systems. This is a different route from certifying a product under Scheme I or registering one under CRS.",
+      "source": [
+        "BIS: System Certification Overview",
+        "https://www.bis.gov.in/system-certification-overview/?lang=en"
+      ],
+      "followUps": [
+        "How do I apply for the ISI Mark?",
+        "What is the BIS Compulsory Registration Scheme?"
+      ]
+    },
+    {
+      "id": "standards",
+      "title": "Finding an Indian Standard",
+      "reviewed_on": "2026-09-29",
+      "questions": [
+        "Where can I find an Indian Standard?",
+        "How do I use Know Your Standard?",
+        "How can I search BIS standards?",
+        "Where can I find standard amendments?"
+      ],
+      "answer": "Use the official Know Your Standard portal to search by Indian Standard number or a product keyword. BIS says it brings together the selected standard, amendments and related documents, with linked licence and laboratory information. Confirm the current edition and the relevant documents there; a prototype search result does not establish applicability.",
+      "source": ["BIS: Know Your Standard", "https://www.bis.gov.in/know-your-standard/?lang=en"],
+      "followUps": ["Is BIS certification mandatory for every product?", "Where can I find BIS recognised laboratories?"]
+    },
+    {
+      "id": "fees",
+      "title": "Product certification fees",
+      "reviewed_on": "2026-09-29",
+      "questions": [
+        "Where can I find BIS certification fees?",
+        "How do I check BIS marking fees?",
+        "Where can I check MSME fee concessions?"
+      ],
+      "answer": "The BIS product certification fee page links a marking-fee search by Indian Standard, the Scheme I fee list, and notification amendments. Check those current documents for the applicable fee and any concession conditions. This guide does not calculate a total application cost or determine concession eligibility; CRS and other schemes have their own fee routes.",
+      "source": ["BIS: Product Certification Fee", "https://www.bis.gov.in/product-certification/product-certification-fee/?lang=en"],
+      "followUps": ["How do I apply for the ISI Mark?", "What is the BIS Compulsory Registration Scheme?"]
+    },
+    {
+      "id": "jewellers",
+      "title": "Jeweller registration",
+      "reviewed_on": "2026-09-29",
+      "questions": [
+        "How does a jeweller register with BIS?",
+        "Where can I find BIS jeweller registration guidance?",
+        "How do I apply for jeweller registration?"
+      ],
+      "answer": "Start with the official BIS Jewellers Registration Scheme page. It links the registration procedure, guidelines for jewellers and the licensed-jeweller list. Follow the linked procedure for an application and check current hallmarking requirements separately. BISynapse does not submit an application or confirm a jeweller's registration status.",
+      "source": ["BIS: Jewellers Registration Scheme", "https://www.bis.gov.in/hallmarking-overview/jewellers-registration-scheme/?lang=en"],
+      "followUps": ["How can I verify a HUID?", "How do I file a BIS consumer complaint?"]
+    }
+  ]
+}

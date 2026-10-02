@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Scan, QrCode, Barcode, Upload, Tag, Search, CheckCircle2, AlertTriangle, XCircle, RefreshCw, BookOpen, MessageSquare, ShieldCheck, FlaskConical, ExternalLink } from 'lucide-react';
+import { Scan, QrCode, Barcode, Upload, Tag, Search, AlertTriangle, RefreshCw, BookOpen, MessageSquare, ShieldCheck, FlaskConical, ExternalLink } from 'lucide-react';
 import { VerificationResult } from '@/lib/types';
 import { fetchScanVerification, fetchLabs, LimsSearchResponse } from '@/lib/apiClient';
 import { BisLimsFallbackCard } from '@/components/BisLimsFallbackCard';
@@ -93,7 +93,7 @@ export default function ScanPage() {
       });
 
       setIsVerifying(false);
-      setScanStatusMessage('Verification complete.');
+      setScanStatusMessage('Prototype lookup complete. Confirm the reference with BIS.');
 
       const rec = res?.matchedRecord;
       const resolvedStandard = rec?.standard_number || (presetType === 'kettle' ? 'IS 302 (Part 2/Sec 3): 2007' : presetType === 'hallmark' ? 'IS 1417: 2016' : 'IS 13252 (Part 1): 2010');
@@ -101,11 +101,11 @@ export default function ScanPage() {
       if (rec) {
         setVerificationResult({
           status: 'NEEDS_VERIFICATION',
-          productName: rec.product_name || rec.product_type || 'Verified BIS Article',
-          manufacturer: rec.manufacturer || rec.jeweller_name || 'BIS Licensed Manufacturer',
+          productName: rec.product_name || rec.product_type || 'Prototype record',
+          manufacturer: rec.manufacturer || rec.jeweller_name || 'Not established',
           licenceNumber: rec.registration_number || rec.huid || scannedValue,
           standardNumber: resolvedStandard,
-          category: rec.category || rec.purity_description || 'Certified Goods',
+          category: rec.category || rec.purity_description || 'Unverified category',
           validityStatus: rec.is_demo ? 'Demo match — authenticity not verified' : 'Requires official verification',
           explanation: 'A prototype record matched. This does not establish product authenticity, certification or licence validity. Check the official BIS service.',
           scannedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -115,12 +115,12 @@ export default function ScanPage() {
         setVerificationResult({
           status: 'NEEDS_VERIFICATION',
           productName: inputValue || 'Entered Registration Reference',
-          manufacturer: 'Manufacturer Record Verification Pending',
-          licenceNumber: inputValue || 'REG-XXXXXXXX',
-          standardNumber: 'IS 302 / IS 13252 / IS 1417',
-          category: 'General Goods',
+          manufacturer: 'Not established',
+          licenceNumber: inputValue || 'Not provided',
+          standardNumber: 'Not established',
+          category: 'Unverified category',
           validityStatus: 'Requires official BIS Portal confirmation',
-          explanation: 'The entered reference code was submitted for verification, but no active match was found in the database. Cross-check on ManakOnline (bis.gov.in).',
+          explanation: 'No prototype record matched. This is not a BIS registry search. Check the exact reference in BIS CARE.',
           scannedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           verificationMethod: method,
         });
@@ -170,10 +170,10 @@ export default function ScanPage() {
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded bg-[#0F4C81] text-amber-400 text-xs font-bold border border-blue-900">
             <Scan className="w-4 h-4" />
-            <span>BIS Product Verification Scanner</span>
+            <span>Prototype label explorer</span>
           </div>
           <h1 className="text-3xl font-black text-[#0A2540] tracking-tight">
-            Scan & Verify
+            Explore a Product Label
           </h1>
           <p className="text-xs sm:text-sm text-slate-600">
             Explore label details and prototype matches. Product authenticity and licence validity require official BIS verification.
@@ -296,7 +296,7 @@ export default function ScanPage() {
                     type="submit"
                     className="px-4 py-2 bg-[#0F4C81] hover:bg-[#0A2540] text-white font-bold text-xs rounded shadow-2xs"
                   >
-                    Verify
+                    Look up example
                   </button>
                 </div>
               </form>
@@ -305,7 +305,7 @@ export default function ScanPage() {
             {/* Test Sample Shortcuts */}
             <div className="pt-4 border-t border-slate-200 text-left">
               <span className="text-[11px] font-bold text-slate-500 tracking-wider block mb-2">
-                Or Test Sample Verification Records:
+                Or try sample prototype records:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <button
@@ -354,30 +354,17 @@ export default function ScanPage() {
               <div className="flex items-center justify-between border-b border-slate-200 pb-4">
                 <div>
                   <span className="text-[10px] font-bold text-slate-500 tracking-wider block">
-                    Product Verification Result
+                    Prototype lookup result
                   </span>
                   <h2 className="text-xl font-black text-[#0A2540] mt-0.5">
                     {verificationResult.productName}
                   </h2>
                 </div>
 
-                {/* Clear Status Indicator */}
-                {verificationResult.status === 'VERIFIED' ? (
-                  <div className="px-3 py-1 bg-emerald-100 border border-emerald-300 text-emerald-800 font-extrabold text-xs rounded flex items-center space-x-1">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>✓ VERIFIED</span>
-                  </div>
-                ) : verificationResult.status === 'NEEDS_VERIFICATION' ? (
-                  <div className="px-3 py-1 bg-amber-100 border border-amber-300 text-amber-800 font-extrabold text-xs rounded flex items-center space-x-1">
-                    <AlertTriangle className="w-4 h-4 text-amber-600" />
-                    <span>⚠ NEEDS VERIFICATION</span>
-                  </div>
-                ) : (
-                  <div className="px-3 py-1 bg-rose-100 border border-rose-300 text-rose-800 font-extrabold text-xs rounded flex items-center space-x-1">
-                    <XCircle className="w-4 h-4 text-rose-600" />
-                    <span>✕ NOT VERIFIED</span>
-                  </div>
-                )}
+                <div className="px-3 py-1 bg-amber-100 border border-amber-300 text-amber-800 font-extrabold text-xs rounded flex items-center space-x-1">
+                  <AlertTriangle className="w-4 h-4 text-amber-600" />
+                  <span>NOT AN AUTHENTICITY CHECK</span>
+                </div>
               </div>
 
               {/* Certification Details Table Grid */}

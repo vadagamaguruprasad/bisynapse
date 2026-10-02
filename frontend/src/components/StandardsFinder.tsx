@@ -5,6 +5,7 @@ import { Search, BookOpen, ArrowRight } from 'lucide-react';
 import { StandardResult, Language } from '@/lib/types';
 
 import { fetchStandardsSearch } from '@/lib/apiClient';
+import Link from 'next/link';
 
 interface StandardsFinderProps {
   currentLang: Language;
@@ -54,14 +55,16 @@ export const StandardsFinder: React.FC<StandardsFinderProps> = ({
         <div className="border-b border-slate-200 pb-4 mb-8">
           <div className="inline-flex items-center space-x-2 px-2.5 py-0.5 rounded bg-blue-100 text-[#0F4C81] text-xs font-bold mb-2">
             <Search className="w-3.5 h-3.5" />
-            <span>Search BIS Standards, Products & Services</span>
+            <span>Prototype standards finder</span>
           </div>
           <h2 className="text-2xl font-black text-[#0A2540]">
-            Indian Standards Search Engine
+            Explore Candidate Indian Standards
           </h2>
           <p className="text-xs text-slate-600">
-            Specify technical product specifications, material composition and industry parameters to search matching Indian Standards (IS).
+            Search captured manual metadata and example records. Confirm the current edition, amendments and applicability with BIS.
           </p>
+          <a href="https://www.bis.gov.in/know-your-standard/?lang=en" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs font-bold text-[#0F4C81] underline">Open official Know Your Standard</a>
+          <Link href="/sources" className="ml-4 inline-block mt-3 text-xs font-bold text-[#0F4C81] underline">Browse captured source library</Link>
         </div>
 
         {/* Search Panel */}
@@ -138,7 +141,7 @@ export const StandardsFinder: React.FC<StandardsFinderProps> = ({
                 className="px-5 py-2.5 bg-[#0F4C81] hover:bg-[#0A2540] text-white font-bold text-xs rounded shadow-2xs flex items-center space-x-2"
               >
                 <Search className="w-4 h-4 text-amber-400" />
-                <span>{isSearching ? 'Searching...' : 'Search BIS Standards'}</span>
+                <span>{isSearching ? 'Searching...' : 'Search prototype records'}</span>
               </button>
             </div>
           </form>
@@ -148,7 +151,7 @@ export const StandardsFinder: React.FC<StandardsFinderProps> = ({
         <div className="space-y-4">
           <div className="flex items-center justify-between border-b border-slate-200 pb-2">
             <h3 className="font-bold text-sm text-[#0A2540]">
-              Search Results ({filteredResults.length} Standards Found)
+              Candidate results ({filteredResults.length})
             </h3>
             <span className="text-xs text-slate-500">Prototype search</span>
           </div>
@@ -171,7 +174,7 @@ export const StandardsFinder: React.FC<StandardsFinderProps> = ({
                   </div>
 
                   <h4 className="font-bold text-slate-900 text-sm">{std.title}</h4>
-                  <p className="text-xs font-semibold text-slate-500">{std.isDemo ? 'Unverified prototype example' : 'Captured BIS manual metadata'}</p>
+                  <p className="text-xs font-semibold text-slate-500">{std.isDemo ? 'Unverified prototype example' : 'Document-linked metadata; current applicability unverified'}</p>
                   <p className="text-xs text-slate-600"><strong>Scope:</strong> {std.whyApplies}</p>
                 </div>
 

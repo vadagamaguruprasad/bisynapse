@@ -1,4 +1,8 @@
-# Water-sector RAG pilot
+# BIS guidance assistant
+
+Twelve BIS service guides are served from `data/sources/bis_service_guides_v1.json` before the water RAG path. They provide general guidance and link to BIS-operated pages for QCOs, Scheme I, CRS, HUID and licence checking routes, laboratories, complaints, FMCS, management systems, standards discovery, fees and jeweller registration. Matching supports listed question variants and optional polite prefixes/suffixes; extra record identifiers or instructions do not match. Answers remain in English and do not query live registries or identify a product's current legal status. A new question needs a reviewed answer and official source before it is added to this allowlist. Each answer displays its entry-level review date, falling back to the dataset's original date.
+
+## Water-sector RAG pilot
 
 The chat endpoint uses local BM25-style keyword retrieval over captured PDF passages, followed by Gemini structured generation. This is retrieval-augmented generation without embeddings, a vector database, or a Supabase migration. Configure GEMINI_API_KEY and GEMINI_MODEL in the backend environment; never expose the key through NEXT_PUBLIC variables. The default model is Gemini 3.6 Flash. GEMINI_FALLBACK_MODEL is optional and may be set to Gemini 3.8 Flash only when that model has available quota. Provider quotas and free-tier availability depend on the account and selected model.
 
@@ -10,7 +14,7 @@ Successful grounded answers for identical, history-free questions are kept in a 
 
 The server checks evidence IDs and exact quoted text, and attaches official manifest URLs and physical PDF page numbers. These checks establish citation provenance, not semantic entailment of every generated claim. Human review and a larger evidence-backed evaluation set are still necessary. Current first-page font corruption prevents reliable extraction of some FSSAI order details; consult the source PDF. No live laboratory registry or full licensed standards are supplied.
 
-Without a model key, chat returns retrieved passages with provider_unavailable rather than a simulated answer. If a model request returns 429, 503 or times out, the four exact suggested demo questions can use manually reviewed answers with exact quotations from visually checked PDF pages. This allowlist is not used for other questions or other failures. The Next.js chat route proxies the Express endpoint or returns 503 when unconfigured. Other prototype features outside chat may still use fixtures.
+Without a model key, water RAG chat returns retrieved passages with provider_unavailable rather than a simulated answer. The reviewed BIS service guides do not need a model key. If a water RAG model request returns 429, 503 or times out, four exact demo questions can use manually reviewed answers with exact quotations from visually checked PDF pages. This allowlist is not used for other questions or other failures. The Next.js chat route proxies the Express endpoint or returns 503 when unconfigured. Other prototype features outside chat may still use fixtures.
 
 Run `npm test` in backend/ and `npm run lint` / `npm run build` in frontend/. Run `python scripts/ingestion/validate_dataset.py` from the project root for corpus integrity. Tests use injected provider responses and exercise retrieval, clarification, abstention, citation repair, outage handling and REST parsing; they are not a live model evaluation.
 

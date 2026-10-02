@@ -1,4 +1,12 @@
-# Authentic water-sector corpus
+# BIS source datasets
+
+`sources/bis_service_guides_v1.json` is a small, manually curated dataset from public BIS-operated service pages. It contains twelve general English service answers, supported question variants, a source URL for each answer, and review dates. The frontend guide picker and backend use the same dataset. It does not contain full Indian Standards, live registry records, or product-specific certification decisions. Matching accepts listed wording with optional polite prefixes/suffixes; additional identifiers or instructions are not discarded. Other queries still follow the water RAG and abstention rules. Recheck the linked BIS page before relying on a time-sensitive answer.
+
+The `/sources` website route searches these 12 guides together with the five records in `sources/manifest.json`. It shows review or capture status and excludes the historical IS 14543 manual by default. This is a local snapshot for source discovery, not a live BIS catalogue. For current records, the site links to BIS Know Your Standard and Published Standards; the latter offers its own Excel export on the official portal.
+
+The [BIS website copyright policy](https://www.bis.gov.in/copyright-policy/?lang=en) permits accurate, attributed reproduction of site material, subject to third-party rights. The BIS standards formulation manual separately requires written permission to reproduce any part of an Indian Standard. This dataset paraphrases public service guidance and links back to BIS; it does not reproduce standards text.
+
+## Water-sector PDF corpus
 
 Five official PDFs produce 203 page chunks: FSSAI December 2025 testing scheme, BIS July 2024 and July 2025 IS 14543 manuals, July 2024 IS 13428 manual, and BIS July 2025 revision circular. Original URLs and separate original/extraction hashes are in sources/manifest.json.
 
@@ -27,4 +35,4 @@ npm run eval:live -- --split held_out
 
 The default evaluation is deterministic and measures retrieval Recall@3, Recall@5 and MRR@5. Live mode additionally measures expected behavior, answer-key term coverage and citation-page accuracy; answerable cases call the configured provider, while deterministic clarification and abstention cases do not. `eval/water_eval_v1_results.json` records the current provisional regression results and their limitations. Do not present them as general model accuracy or publish provider-generated scores until the cases and scoring rubric receive domain review.
 
-Local diagnostics and reconstructed drafts are retained under ignored review/ and fixtures/ directories and must not be ingested. Application code and shared databases remain unchanged.
+Local diagnostics and reconstructed drafts are retained under ignored review/ and fixtures/ directories and must not be ingested.

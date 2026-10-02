@@ -10,7 +10,7 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "BISynapse — Digital Gateway to BIS Standards, Certification & Compliance",
+  title: "BISynapse — Indian Standards & BIS Service Guidance",
   description: "Independent SIH prototype for Indian Standards and BIS service guidance. Not an official government portal.",
 };
 

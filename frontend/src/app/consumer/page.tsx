@@ -13,10 +13,10 @@ import { useAuth } from '@/lib/authContext';
 function ConsumerDashboardContent() {
   const { user, logout } = useAuth();
   const services = [
-    { title: 'Scan & Verify Product', desc: 'Scan ISI mark or QR code on product label', icon: Scan, href: '/scan' },
+    { title: 'Explore a Product Label', desc: 'Inspect a label in the prototype, then verify on BIS CARE', icon: Scan, href: '/scan' },
     { title: 'Search BIS Standard', desc: 'Find IS standards matching products', icon: Search, href: '/standards' },
-    { title: 'Check Certification', desc: 'Verify CM/L or CRS licence numbers', icon: Award, href: '/certification' },
-    { title: 'Hallmark Verification', desc: 'Verify 6-digit HUID code on gold jewellery', icon: Gem, href: '/hallmarking' },
+    { title: 'Check a BIS Mark', desc: 'Follow the official check for ISI, HUID or CRS marks', icon: Award, href: '/journeys/consumer' },
+    { title: 'Hallmarking Guidance', desc: 'Learn how to check a HUID in BIS CARE', icon: Gem, href: '/hallmarking' },
     { title: 'Ask BISynapse', desc: 'Conversational AI assistant for BIS queries', icon: MessageSquare, href: '/assistant' },
     { title: 'Report a Product', desc: 'Report fake ISI marks or sub-standard goods', icon: Flag, href: '/support' }
   ];
@@ -38,7 +38,7 @@ function ConsumerDashboardContent() {
               Welcome, {user?.name || 'Consumer'}
             </h1>
             <p className="text-xs text-slate-300">
-              Verify products, check hallmarking authenticity, and protect your consumer quality rights.
+              Understand marks, find official checks, and get help with product quality concerns.
             </p>
           </div>
 
